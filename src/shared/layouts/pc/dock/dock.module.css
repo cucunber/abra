@@ -1,0 +1,6 @@
+.wrapper {
+    padding: 10px 12px;
+    background:var(--chakra-colors-gray-300);
+    margin-top: auto;
+    min-height: 66px;
+}

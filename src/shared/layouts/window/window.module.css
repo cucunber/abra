@@ -1,0 +1,19 @@
+.window {
+    min-width: 50dvw;
+    min-height: 50dvh;
+    border-radius: 20px;
+    box-shadow: var(--chakra-shadows-xl);
+    pointer-events: all;
+    position: absolute;
+    overflow: hidden;
+}
+
+.panel {
+    min-height: 30px;
+    padding: 4px 12px;
+    background: var(--chakra-colors-gray-100);
+}
+
+.controls {
+    margin-left: auto;
+}

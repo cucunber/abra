@@ -1,0 +1,10 @@
+.overflow-ellipse {
+  display: -webkit-box;
+  -webkit-line-clamp: attr(data-line-clamp, 1);
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.work-break {
+  word-break: break-word;
+}

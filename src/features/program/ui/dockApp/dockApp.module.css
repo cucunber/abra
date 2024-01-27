@@ -1,0 +1,14 @@
+.wrapper {
+    max-width: 40px;
+    padding: 4px;
+    cursor: pointer;
+    border-radius: 8px;
+    background: white;
+}
+
+.icon {
+    --size: 32px;
+    width: var(--size);
+    height: var(--size);
+    object-fit: contain;
+}
