@@ -66,3 +66,7 @@
   text-overflow: ellipsis;
   color: var(--chakra-colors-gray-200);
 }
+
+.textarea {
+  color: var(--chakra-colors-white);
+}

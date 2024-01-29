@@ -1,6 +1,7 @@
 import {
   Avatar,
   Box,
+  Button,
   Grid,
   HStack,
   Text,
@@ -29,7 +30,10 @@ export const DiscordUI = () => {
           <VStack className={s.messages}>
             <Text className={s.text}>{faker.lorem.paragraphs(5)}</Text>
           </VStack>
-          <Textarea className={s.textarea} />
+          <HStack>
+            <Textarea className={s.textarea} />
+            <Button>Отправить</Button>
+          </HStack>
         </Box>
       </Grid>
     </Box>
