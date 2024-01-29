@@ -12,5 +12,5 @@ export interface IProgramExeCtx {
 
 export interface IProgram {
     meta: IProgramMeta,
-    exeCtx: IProgramExeCtx,
+    exeCtx: IProgramExeCtx
 }

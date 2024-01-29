@@ -1,6 +1,6 @@
 import { PropsWithChildren } from "react";
 import { IWindow } from "./window.type";
-import { Box, HStack, IconButton, Text } from "@chakra-ui/react";
+import { Box, HStack, IconButton, Text, VStack } from "@chakra-ui/react";
 import { CloseIcon, MinusIcon } from "@chakra-ui/icons";
 import { processes, removeFromProcess } from "../../../features/process";
 import { windows } from "../../../features/windows";
@@ -36,7 +36,7 @@ export const Window = ({ children, pid, className, ...properties }: PropsWithChi
     const windowName = process.program.meta.name;
 
     return (
-        <Box className={clsx(s.window, className)} {...properties}>
+        <VStack alignContent="initial" justify="initial" className={clsx(s.window, className)} {...properties}>
             <HStack className={s.panel}>
                 <Text fontWeight="700" fontSize="sm">{windowName}</Text>
                 <HStack className={s.controls}>
@@ -44,9 +44,9 @@ export const Window = ({ children, pid, className, ...properties }: PropsWithChi
                     <IconButton size="xs" aria-label="close" onClick={handleClose} icon={<CloseIcon />} />
                 </HStack>
             </HStack>
-            <Box className={s.content}>
+            <Box flex="1" className={s.content}>
                 {children}
             </Box>
-        </Box>
+        </VStack>
     )
 }

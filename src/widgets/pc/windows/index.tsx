@@ -6,6 +6,12 @@ import { Window } from "../../../shared/layouts/window";
 
 import s from './windows.module.css';
 import { createPortal } from "react-dom";
+import { SYSTEM_MONITORING } from "../../../shared/config/programs";
+import { Monitoring } from "../../programsUI/monitoring";
+
+const APPS_MAP = {
+    [SYSTEM_MONITORING.meta.name]: Monitoring
+}
 
 export const Windows = () => {
     const orderedWindows = useAppSelector(windows.selectors.selectWindows);
@@ -18,9 +24,12 @@ export const Windows = () => {
                 }
                 const zIndex = -index;
                 const { process } = win;
+
+                const Component = APPS_MAP[process.program.meta.name] || (() => <>simple app</>)
+
                 return (
                     <Window key={process.pid} zIndex={zIndex} pid={process.pid}>
-                        simple app
+                        <Component />
                     </Window>
                 )
             })}
