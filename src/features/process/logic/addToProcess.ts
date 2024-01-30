@@ -42,7 +42,7 @@ export const addProgramToProcess = createAppAsyncThunk(
             ctx: ProcessCtx({
                 pointer: 0,
                 priority: 0,
-                quantum: commandsLeft,
+                quantum: 4,
                 commands: program.exeCtx.commands,
                 state: PROCESS_STATE.READY,
                 commandsLeft: commandsLeft,
@@ -51,8 +51,6 @@ export const addProgramToProcess = createAppAsyncThunk(
         
         thunkApi.dispatch(processes.actions.updatePid());
         thunkApi.dispatch(processes.actions.addToQueue(newProcess));
-       
-        thunkApi.fulfillWithValue(process);
     }
 )
 

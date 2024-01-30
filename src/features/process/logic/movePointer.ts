@@ -46,7 +46,7 @@ export const moveProcessPointer = createAppAsyncThunk(
             ...selectedProcess,
             ctx: ProcessCtx({
                 ...selectedProcess.ctx,
-                quantum: commandsLeft,
+                quantum: 4,
                 pointer: pointer,
                 state: isWaiting ? PROCESS_STATE.WAITING : PROCESS_STATE.READY,
                 commandsLeft: commandsLeft,
