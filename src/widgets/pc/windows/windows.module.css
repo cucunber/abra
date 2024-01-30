@@ -1,5 +1,4 @@
 .wrapper {
-  transform: translateY(50%);
   position: fixed;
   inset: 0;
   display: grid;

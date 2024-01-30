@@ -1,12 +1,19 @@
 .wrapper {
   min-height: 100dvh;
   justify-content: space-between;
-  background: var(--chakra-colors-purple-50);
+  background: var(--chakra-colors-green-50);
 }
 
 .screen {
-  padding: 8px;
   flex: 1 1 auto;
   max-height: 50dvh;
-  border-bottom: 5px solid var(--chakra-colors-purple-100);
+  margin-top: 50dvh;
+  border-top: 5px solid var(--chakra-colors-green-100);
+}
+
+.programs {
+  max-width: 50%;
+  height: 100%;
+
+  border-right: 5px solid var(--chakra-colors-green-100);
 }

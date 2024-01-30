@@ -10,11 +10,11 @@ import {
 } from "../../../widgets/pc/programsUI";
 
 export const DEFAULT_SCREENS: Record<string, ReactNode> = {
-  "Google Chrome": <GoogleUI />,
+  // "Google Chrome": <GoogleUI />,
   // Firefox: <FirefoxUI />,
-  Word: <WordUI />,
-  "Power Point": <PowerPointUI />,
-  // Excel: <ExcelUI />,
-  // Discord: <DiscordUI />,
-  // Notepad: <NotepadUI />,
+  // Word: <WordUI />,
+  // "Power Point": <PowerPointUI />,
+  Excel: <ExcelUI />,
+  Discord: <DiscordUI />,
+  Notepad: <NotepadUI />,
 };
