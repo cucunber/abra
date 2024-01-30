@@ -16,13 +16,11 @@ export function Draggable({ children }: PropsWithChildren) {
         top: y,
         transform: `translate3d(${transform.x}px, ${
           transform.y ?? 0
-        }px, 0) scale(1.01)`,
+        }px, 0)`,
       }
     : { left: x, top: y };
 
-  const draggableListeners = useMemo(() => listeners, [listeners, transform]);
-
-  console.log(draggableListeners);
+  const draggableListeners = useMemo(() => listeners, [listeners]);
 
   return (
     <div
