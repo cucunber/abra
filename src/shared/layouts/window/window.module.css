@@ -1,26 +1,28 @@
 .window {
-  min-width: 50dvw;
-  min-height: 50dvh;
-  border-radius: 20px;
-  box-shadow: var(--chakra-shadows-xl);
-  pointer-events: all;
-  position: absolute;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  max-height: 50dvh;
-  height: 100%;
+    min-width: 50dvw;
+    min-height: 50dvh;
+    max-width: 100dvh;
+    max-height: 100dvh;
+    border-radius: 20px;
+    box-shadow: var(--chakra-shadows-xl);
+    pointer-events: all;
+    position: absolute;
+    overflow: hidden;
+    resize: both;
+    background: var(--chakra-colors-white);
 }
 
 .panel {
-  min-height: 30px;
-  padding: 4px 12px;
-  background: var(--chakra-colors-gray-100);
+    min-height: 30px;
+    padding: 4px 12px;
+    background: var(--chakra-colors-gray-100);
+    width: 100%;
 }
 
 .controls {
-  margin-left: auto;
+    margin-left: auto;
 }
+
 .content {
-  height: 100%;
+    width: 100%;
 }

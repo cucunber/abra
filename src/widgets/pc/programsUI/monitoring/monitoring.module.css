@@ -1,0 +1,6 @@
+.wrapper {
+    min-width: 50dvh;
+    min-height: 50dvh;
+    height: 100%;
+    overflow-y: scroll;
+}

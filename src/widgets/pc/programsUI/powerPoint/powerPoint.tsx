@@ -5,56 +5,38 @@ import {
   Heading,
   Menu,
   MenuButton,
-  MenuItem,
-  MenuList,
   VStack,
 } from "@chakra-ui/react";
 import s from "./powerPoint.module.css";
+import { moveProcessPointer } from "../../../../features/process/logic/movePointer";
+import { useBindActionCreators } from "../../../../shared/hooks/redux";
+import { useWindow } from "../../../../shared/layouts/window/window.hooks";
+
+const ACTION_CREATORS = {
+  saveAC: (pid: number) => moveProcessPointer({ pid, pointer: 2 }),
+  deleteAC: (pid: number) => moveProcessPointer({ pid, pointer: 3 })
+}
+
 
 export const PowerPointUI = () => {
+  const { deleteAC, saveAC } = useBindActionCreators(ACTION_CREATORS)
+
+  const { pid } = useWindow();
+
+  const handleSave = () => {
+    saveAC(pid);
+  }
+
+  const handleDelete = () => {
+    deleteAC(pid);
+  }
   return (
     <Box className={s.container}>
       <Box className={s.header}>
-        <HStack>
+        <HStack className={s.panel}>
           <Menu>
-            <MenuButton as={Box}>Файл</MenuButton>
-            <MenuList>
-              <MenuItem>Создать</MenuItem>
-              <MenuItem>Открыть</MenuItem>
-              <MenuItem>Удалить</MenuItem>
-              <MenuItem>Отменить</MenuItem>
-              <MenuItem>Поставить 5</MenuItem>
-            </MenuList>
-          </Menu>
-          <Menu>
-            <MenuButton as={Box}>Вставить</MenuButton>
-            <MenuList>
-              <MenuItem>Таблицу</MenuItem>
-              <MenuItem>Новый слайд</MenuItem>
-              <MenuItem>Рисунок</MenuItem>
-              <MenuItem>Фигуру</MenuItem>
-              <MenuItem>Символ</MenuItem>
-              <MenuItem>Формулу</MenuItem>
-            </MenuList>
-          </Menu>
-          <Menu>
-            <MenuButton as={Box}>Переходы</MenuButton>
-            <MenuList>
-              <MenuItem>Без перехода</MenuItem>
-              <MenuItem>Сдвиг</MenuItem>
-              <MenuItem>Появление</MenuItem>
-              <MenuItem>Панорама</MenuItem>
-              <MenuItem>Вырезание</MenuItem>
-            </MenuList>
-          </Menu>
-          <Menu>
-            <MenuButton as={Box}>Справка</MenuButton>
-            <MenuList>
-              <MenuItem>Справка</MenuItem>
-              <MenuItem>Отзывы</MenuItem>
-              <MenuItem>Предложения</MenuItem>
-              <MenuItem>Новые возможности</MenuItem>
-            </MenuList>
+            <MenuButton onClick={handleSave} as={Box}>Сохранить</MenuButton>
+            <MenuButton onClick={handleDelete} as={Box}>Удалить</MenuButton>
           </Menu>
         </HStack>
       </Box>

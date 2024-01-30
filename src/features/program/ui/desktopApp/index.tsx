@@ -1,4 +1,4 @@
-import { Image, Text, VStack } from "@chakra-ui/react";
+import { Box, Text, VStack } from "@chakra-ui/react";
 import { IDesktopApp } from "./desktopApp.type";
 
 import s from './desktopApp.module.css';
@@ -17,7 +17,7 @@ export const DesktopApp = (program: IDesktopApp) => {
 
     return (
         <VStack className={ s.wrapper } justifyContent="flex-start" as="button" onClick={handleClick}>
-            <Image src={ meta.icon } className={ s.icon } />
+            <Box backgroundImage={ meta.icon } className={ s.icon } />
             <Text data-line-clamp={2} fontSize='sm' className={ clsx("overflow-ellipses", "work-break") }>{meta.name}</Text>
         </VStack>
     )

@@ -2,11 +2,27 @@
   min-height: 100dvh;
   justify-content: space-between;
   background: var(--chakra-colors-purple-50);
+  background-image: url('/public/base.png');
+  background-repeat: no-repeat;
+  background-position: bottom;
+  position: relative;
+}
+
+.wrapper::after {
+  background-image: url('/public/logo.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  top: 0;
+  right: 0;
+  content: '';
+  position: absolute;
+  z-index: 2;
+  width: 300px;
+  height: 150px;
 }
 
 .screen {
   padding: 8px;
   flex: 1 1 auto;
   max-height: 50dvh;
-  border-bottom: 5px solid var(--chakra-colors-purple-100);
 }
