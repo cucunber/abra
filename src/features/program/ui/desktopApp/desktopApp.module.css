@@ -19,5 +19,4 @@
     width: var(--size);
     height: var(--size);
     background-size: cover;
-    filter: hue-rotate(120deg);
 }
