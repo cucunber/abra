@@ -3,13 +3,13 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background: var(--chakra-colors-gray-700);
+    /* background: var(--chakra-colors-gray-700); */
 }
   
 .title {
-  color: var(--chakra-colors-orange-400);
+  /* color: var(--chakra-colors-orange-400); */
 }
 
 .search {
-  background: var(--chakra-colors-orange-400);
+  /* background: var(--chakra-colors-orange-400); */
 }

@@ -1,4 +1,6 @@
 .wrapper {
-    min-width: 50dvh;
-    height: 50dvh;
+    padding-right: 20px;
+    min-width: 20dvw;
+    min-height: 80dvh;
+    height: 50dvh;;
 }

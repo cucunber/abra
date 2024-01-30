@@ -10,6 +10,7 @@ import clsx from "clsx";
 import s from "./window.module.css";
 import { useDraggableListenersContext } from "../../components/draggable/draggableListeners.hooks";
 import { WindowContext } from "./window.context";
+import { CloseIcon, MinusIcon } from "@chakra-ui/icons";
 
 const ACTION_CREATORS = {
   onClose: removeFromProcess,
@@ -46,10 +47,21 @@ export const Window = ({
 
   return (
     <WindowContext.Provider value={value}>
-      <VStack gap="0" alignContent="initial" justify="initial" className={clsx(s.window, className)} {...properties}>
+      <VStack
+        gap="0"
+        alignContent="initial"
+        justify="initial"
+        className={clsx(s.window, className)}
+        {...properties}
+      >
         <HStack className={s.panel}>
           <HStack w="100%" {...listeners}>
-            <Box backgroundImage={ process.program.meta.icon } w="16px" h="16px" backgroundSize="cover" />
+            <Box
+              backgroundImage={process.program.meta.icon}
+              w="16px"
+              h="16px"
+              backgroundSize="cover"
+            />
             <Text fontWeight="700" fontSize="sm">
               {windowName}
             </Text>
@@ -59,17 +71,19 @@ export const Window = ({
               size="xs"
               aria-label="close"
               onClick={handleCollapse}
-              icon={<Box background="orange" w="16px" h="16px" borderRadius="50%" />}
+              icon={<MinusIcon />}
             />
             <IconButton
               size="xs"
               aria-label="close"
               onClick={handleClose}
-              icon={<Box background="red" w="16px" h="16px" borderRadius="50%" />}
+              icon={<CloseIcon />}
             />
           </HStack>
         </HStack>
-        <Box flex="1" className={s.content}>{children}</Box>
+        <Box flex="1" className={s.content}>
+          {children}
+        </Box>
       </VStack>
     </WindowContext.Provider>
   );

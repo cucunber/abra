@@ -1,6 +1,15 @@
 .wrapper {
-    padding: 10px 12px;
-    background:var(--chakra-colors-gray-300);
-    margin-top: auto;
-    min-height: 66px;
+  padding: 8px 12px;
+  background: var(--chakra-colors-gray-300);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: auto;
+  min-height: 54px;
+  position: relative;
+}
+
+.time {
+  position: absolute;
+  right: 20px;
 }

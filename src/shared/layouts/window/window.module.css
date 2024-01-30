@@ -1,5 +1,5 @@
 .window {
-    min-width: 10dvw;
+    min-width: 30dvw;
     min-height: 50dvh;
     max-width: 100dvh;
     max-height: 100dvh;
@@ -9,6 +9,7 @@
     position: absolute;
     overflow: hidden;
     resize: both;
+    
     background: var(--chakra-colors-white);
 }
 
