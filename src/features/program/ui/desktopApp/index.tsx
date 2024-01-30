@@ -27,7 +27,6 @@ export const DesktopApp = (program: IDesktopApp) => {
         data-line-clamp={2}
         fontSize="sm"
         className={clsx("overflow-ellipses", "work-break")}
-        color="#fff"
       >
         {meta.name}
       </Text>

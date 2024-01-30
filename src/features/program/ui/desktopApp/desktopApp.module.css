@@ -18,5 +18,5 @@
     --size: 32px;
     width: var(--size);
     height: var(--size);
-    background-size: cover;
+    background-size: contain;
 }
