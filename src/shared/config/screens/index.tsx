@@ -11,10 +11,10 @@ import {
 
 export const DEFAULT_SCREENS: Record<string, ReactNode> = {
   "Google Chrome": <GoogleUI />,
-  Firefox: <FirefoxUI />,
+  // Firefox: <FirefoxUI />,
   Word: <WordUI />,
   "Power Point": <PowerPointUI />,
-  Excel: <ExcelUI />,
-  Discord: <DiscordUI />,
-  Notepad: <NotepadUI />,
+  // Excel: <ExcelUI />,
+  // Discord: <DiscordUI />,
+  // Notepad: <NotepadUI />,
 };

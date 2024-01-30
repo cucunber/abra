@@ -8,7 +8,7 @@ export const Programs = () => {
     const programs = useAppSelector(installedPrograms.selectors.selectPrograms, shallowEqual);
 
     return (
-        <HStack wrap="wrap" alignItems="stretch">
+        <HStack wrap="wrap" alignItems="stretch" w="100%">
             {Object.values(programs).map(program => <DesktopApp {...program} key={program.meta.name} />)}
         </HStack>
     )

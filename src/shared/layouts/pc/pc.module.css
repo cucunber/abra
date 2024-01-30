@@ -1,7 +1,12 @@
 .wrapper {
-    min-height: 100dvh;
+  min-height: 100dvh;
+  justify-content: space-between;
+  background: var(--chakra-colors-purple-50);
 }
 
 .screen {
-    padding: 8px;
+  padding: 8px;
+  flex: 1 1 auto;
+  max-height: 50dvh;
+  border-bottom: 5px solid var(--chakra-colors-purple-100);
 }
