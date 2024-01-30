@@ -52,7 +52,7 @@ export const HDDMonitoring = () => {
           isAnimationActive={false}
           type="monotone"
           dataKey="size"
-          stroke="#8884d8"
+          stroke="#E53E3E"
           strokeWidth={2}
         />
       </LineChart>

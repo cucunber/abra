@@ -1,4 +1,4 @@
-import { VStack } from "@chakra-ui/react";
+import { HStack, VStack } from "@chakra-ui/react";
 import { useAppSelector } from "../../../hooks/redux";
 import { processes } from "../../../../features/process";
 import { DockApp } from "../../../../features/program/ui";
@@ -10,10 +10,10 @@ export const Dock = () => {
     processes.selectors.selectRunningProcesses
   );
   return (
-    <VStack className={s.wrapper}>
+    <HStack className={s.wrapper}>
       {Object.values(runningProcesses).map((process) => (
         <DockApp {...process} key={process.pid} />
       ))}
-    </VStack>
+    </HStack>
   );
 };

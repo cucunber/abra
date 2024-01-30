@@ -1,6 +1,5 @@
 import {
   Box,
-  HStack,
   Tab,
   TabList,
   TabPanel,
@@ -17,30 +16,25 @@ import { ProcessTable } from "./processTable";
 export const Monitoring = () => {
   return (
     <VStack className={s.wrapper}>
-      <Tabs w="100%">
+      <Tabs w="100%" colorScheme="red">
         <TabList>
-          <Tab>График загрузки HDD</Tab>
-          <Tab>График загрузки RAM</Tab>
+          <Tab>Мониторинг ОЗУ</Tab>
+          <Tab>Мониторинг HDD</Tab>
           <Tab>Таблица</Tab>
         </TabList>
         <TabPanels w="100%">
-          <TabPanel h="50dvh">
-            {/* <HStack h="100%"> */}
-            <Box flex="1 1 100%" h="100%">
-              <HDDMonitoring />
-            </Box>
-
-            {/* </HStack> */}
-          </TabPanel>
           <TabPanel h="50dvh">
             <Box flex="1 1 50%" width="100%" h="100%">
               <RAMMonitoring />
             </Box>
           </TabPanel>
+          <TabPanel h="50dvh">
+            <Box flex="1 1 100%" h="100%">
+              <HDDMonitoring />
+            </Box>
+          </TabPanel>
           <TabPanel>
-            {/* <Box width="100%"> */}
             <ProcessTable />
-            {/* </Box> */}
           </TabPanel>
         </TabPanels>
       </Tabs>

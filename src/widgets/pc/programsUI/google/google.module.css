@@ -4,3 +4,7 @@
   flex-direction: column;
   justify-content: center;
 }
+
+.panel {
+  background: var(--chakra-colors-blackAlpha-300);
+}

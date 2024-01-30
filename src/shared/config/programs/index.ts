@@ -29,18 +29,50 @@ export const SYSTEM_MONITORING = Program({
 });
 
 export const DEFAULT_INSTALLED_PROGRAMS = [
-  // Program({
-  //   meta: ProgramMeta({ icon: "/programs/chrome.png", name: "Google Chrome" }),
-  //   exeCtx: ProgramExeCtx({
-  //     size: convertUnitsToBytes(100),
-  //     commands: [
-  //       DEFAULT_COMMANDS.input,
-  //       DEFAULT_COMMANDS.math,
-  //       DEFAULT_COMMANDS.draw,
-  //       DEFAULT_COMMANDS.output,
-  //     ],
-  //   }),
-  // }),
+  Program({
+    meta: ProgramMeta({ icon: "/programs/chrome.png", name: "Google Chrome" }),
+    exeCtx: ProgramExeCtx({
+      size: convertUnitsToBytes(100),
+      commands: [
+        DEFAULT_COMMANDS.input,
+        DEFAULT_COMMANDS.math,
+        Command({
+          meta: { name: "Download file" },
+          exeCtx: {
+            ...DEFAULT_COMMANDS.writeFile.exeCtx,
+            ticks: convertUnitsToHz(500, HZ_UNITS.mhz),
+            onComplete: (ctx) => {
+              store.dispatch(
+                system.actions.addFile(convertUnitsToBytes(1, SYS_UNITS.GiB))
+              );
+              store.dispatch(moveProcessPointer({ pid: ctx.pid, pointer: 0 }));
+            },
+          },
+        }),
+        Command({
+          meta: { name: "Delete file" },
+          exeCtx: {
+            ...DEFAULT_COMMANDS.delete.exeCtx,
+            ticks: convertUnitsToHz(400, HZ_UNITS.mhz),
+            onComplete: (ctx) => {
+              store.dispatch(system.actions.removeRandomFile());
+              store.dispatch(moveProcessPointer({ pid: ctx.pid, pointer: 0 }));
+            },
+          },
+        }),
+        Command({
+          meta: { name: "Surf the net" },
+          exeCtx: {
+            ...DEFAULT_COMMANDS.delete.exeCtx,
+            ticks: convertUnitsToHz(100, HZ_UNITS.mhz),
+            onComplete: (ctx) => {
+              store.dispatch(moveProcessPointer({ pid: ctx.pid, pointer: 0 }));
+            },
+          },
+        }),
+      ],
+    }),
+  }),
   // Program({
   //   meta: ProgramMeta({ icon: "/programs/firefox.png", name: "Firefox" }),
   //   exeCtx: ProgramExeCtx({
@@ -92,53 +124,53 @@ export const DEFAULT_INSTALLED_PROGRAMS = [
   //     ],
   //   }),
   // }),
-  Program({
-    meta: ProgramMeta({
-      icon: "/programs/discord.png",
-      name: "Discord",
-    }),
-    exeCtx: ProgramExeCtx({
-      size: convertUnitsToBytes(250, SYS_UNITS.MiB),
-      commands: [
-        DEFAULT_COMMANDS.draw,
-        DEFAULT_COMMANDS.input,
-        Command({
-          meta: { name: "Download files" },
-          exeCtx: {
-            ...DEFAULT_COMMANDS.writeFile.exeCtx,
-            ticks: convertUnitsToHz(500, HZ_UNITS.mhz),
-            onComplete: (ctx) => {
-              store.dispatch(
-                system.actions.addFile(convertUnitsToBytes(1, SYS_UNITS.GiB))
-              );
-              store.dispatch(moveProcessPointer({ pid: ctx.pid, pointer: 0 }));
-            },
-          },
-        }),
-        Command({
-          meta: { name: "Delete files" },
-          exeCtx: {
-            ...DEFAULT_COMMANDS.delete.exeCtx,
-            ticks: convertUnitsToHz(400, HZ_UNITS.mhz),
-            onComplete: (ctx) => {
-              store.dispatch(system.actions.removeRandomFile());
-              store.dispatch(moveProcessPointer({ pid: ctx.pid, pointer: 0 }));
-            },
-          },
-        }),
-        Command({
-          meta: { name: "Send post http request" },
-          exeCtx: {
-            ...DEFAULT_COMMANDS.delete.exeCtx,
-            ticks: convertUnitsToHz(100, HZ_UNITS.mhz),
-            onComplete: (ctx) => {
-              store.dispatch(moveProcessPointer({ pid: ctx.pid, pointer: 0 }));
-            },
-          },
-        }),
-      ],
-    }),
-  }),
+  // Program({
+  //   meta: ProgramMeta({
+  //     icon: "/programs/discord.png",
+  //     name: "Discord",
+  //   }),
+  //   exeCtx: ProgramExeCtx({
+  //     size: convertUnitsToBytes(250, SYS_UNITS.MiB),
+  //     commands: [
+  //       DEFAULT_COMMANDS.draw,
+  //       DEFAULT_COMMANDS.input,
+  //       Command({
+  //         meta: { name: "Download files" },
+  //         exeCtx: {
+  //           ...DEFAULT_COMMANDS.writeFile.exeCtx,
+  //           ticks: convertUnitsToHz(500, HZ_UNITS.mhz),
+  //           onComplete: (ctx) => {
+  //             store.dispatch(
+  //               system.actions.addFile(convertUnitsToBytes(1, SYS_UNITS.GiB))
+  //             );
+  //             store.dispatch(moveProcessPointer({ pid: ctx.pid, pointer: 0 }));
+  //           },
+  //         },
+  //       }),
+  //       Command({
+  //         meta: { name: "Delete files" },
+  //         exeCtx: {
+  //           ...DEFAULT_COMMANDS.delete.exeCtx,
+  //           ticks: convertUnitsToHz(400, HZ_UNITS.mhz),
+  //           onComplete: (ctx) => {
+  //             store.dispatch(system.actions.removeRandomFile());
+  //             store.dispatch(moveProcessPointer({ pid: ctx.pid, pointer: 0 }));
+  //           },
+  //         },
+  //       }),
+  //       Command({
+  //         meta: { name: "Send post http request" },
+  //         exeCtx: {
+  //           ...DEFAULT_COMMANDS.delete.exeCtx,
+  //           ticks: convertUnitsToHz(100, HZ_UNITS.mhz),
+  //           onComplete: (ctx) => {
+  //             store.dispatch(moveProcessPointer({ pid: ctx.pid, pointer: 0 }));
+  //           },
+  //         },
+  //       }),
+  //     ],
+  //   }),
+  // }),
   Program({
     meta: ProgramMeta({
       icon: "/programs/notepad.png",
