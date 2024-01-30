@@ -1,4 +1,5 @@
 .wrapper {
-    min-width: 50dvh;
+    min-width: 50dvw;
+    width: 100%;
     height: 50dvh;
 }

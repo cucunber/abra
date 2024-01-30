@@ -16,8 +16,8 @@ export const DEFAULT_SCREENS: Record<string, ReactNode> = {
   // Firefox: <FirefoxUI />,
   // Word: <WordUI />,
   // "Power Point": <PowerPointUI />,
-  Excel: <ExcelUI />,
+  // Excel: <ExcelUI />,
   Discord: <DiscordUI />,
   Notepad: <NotepadUI />,
-  [SYSTEM_MONITORING.meta.name]: <Monitoring />
+  // [SYSTEM_MONITORING.meta.name]: <Monitoring />
 };

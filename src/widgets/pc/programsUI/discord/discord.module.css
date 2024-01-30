@@ -3,6 +3,8 @@
   background: var(--chakra-colors-blackAlpha-700);
   padding-bottom: 30px;
   overflow: hidden;
+  min-width: 650px;
+  max-height: 400px;
 }
 
 .content {
@@ -20,7 +22,7 @@
 }
 
 .messages {
-  height: 70%;
+  height: 50%;
   overflow: auto;
 }
 

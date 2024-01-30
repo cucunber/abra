@@ -1,17 +1,20 @@
 .wrapper {
   min-height: 100dvh;
+  max-height: 100dvh;
   justify-content: space-between;
   background: var(--chakra-colors-green-50);
 }
 
 .screen {
   flex: 1 1 auto;
-  max-height: 50dvh;
-  margin-top: 50dvh;
+  display: flex;
+  /* max-height: 50dvh; */
+  margin-top: 40dvh;
   border-top: 5px solid var(--chakra-colors-green-100);
 }
 
 .programs {
+  flex: 1 1 40%;
   max-width: 50%;
   height: 100%;
 
