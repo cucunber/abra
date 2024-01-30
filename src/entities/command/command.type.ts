@@ -1,3 +1,5 @@
+import { IProcess } from "../process/process.type";
+
 export const COMMAND_TYPE = {
     WAITING: 'waiting',
     DEFAULT: 'default'
@@ -11,7 +13,7 @@ export interface ICommandExeCtx {
     size: number;
     ticks: number;
     type: typeof COMMAND_TYPE[keyof typeof COMMAND_TYPE],
-    onComplete?: () => void;
+    onComplete?: (ctx: IProcess) => void;
 }
 
 export interface ICommand {

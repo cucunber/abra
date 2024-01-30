@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux"
-import { processes } from "../../../../features/process"
+import { processes } from "../../../../../features/process"
 import { Table, Th, Tr, Thead, Tbody, Td } from "@chakra-ui/react";
 
 export const ProcessTable = () => {
@@ -12,6 +12,8 @@ export const ProcessTable = () => {
                     <Th>Process</Th>
                     <Th>Pid</Th>
                     <Th>State</Th>
+                    <Th>Command</Th>
+                    <Th>Left</Th>
                 </Tr>
             </Thead>
             <Tbody>
@@ -20,6 +22,8 @@ export const ProcessTable = () => {
                         <Td>{process.program.meta.name}</Td>
                         <Td>{process.pid}</Td>
                         <Td>{process.ctx.state}</Td>
+                        <Td>{process.ctx.commands[process.ctx.pointer].meta.name}</Td>
+                        <Td>{process.ctx.commandsLeft}</Td>
                     </Tr>
                 ))}
             </Tbody>

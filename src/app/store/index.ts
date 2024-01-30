@@ -13,8 +13,10 @@ export const store = configureStore({
         processes: processes.reducer,
         windows: windows.reducer,
         monitoring: monitoring.reducer,
-        
-    }
+    },
+    middleware: (middleware) => middleware({
+        serializableCheck: false
+    })
 })
 
 store.dispatch(startSystem());

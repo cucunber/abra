@@ -1,9 +1,9 @@
-import { useAppSelector } from "../../../../shared/hooks/redux"
-import { monitoring } from "../../../../features/monitoring";
-import { TickData } from "../../../../entities/tickData/tickData";
+import { useAppSelector } from "../../../../../shared/hooks/redux"
+import { monitoring } from "../../../../../features/monitoring";
+import { TickData } from "../../../../../entities/tickData/tickData";
 import { Line, LineChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
-import { system } from "../../../../features/system";
-import { SYS_UNITS, convertBytesToUnits } from "../../../../shared/utils/systemUnits";
+import { system } from "../../../../../features/system";
+import { SYS_UNITS, convertBytesToUnits } from "../../../../../shared/utils/systemUnits";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 

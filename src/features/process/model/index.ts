@@ -27,10 +27,9 @@ export const processes = createSlice({
             state.pid += 1;
         },
         updateRunning: (state, action: PayloadAction<Record<number, IProcess>>) => {
-            state.running = {
-                ...state.running,
-                ...action.payload
-            };
+            Object.keys(action.payload).forEach((pid) => {
+                state.running[pid as unknown as number] = action.payload[pid as unknown as number];
+            });
         }
     },
     selectors: {

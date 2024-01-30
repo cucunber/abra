@@ -1,14 +1,15 @@
 import { system } from "..";
+import { Command } from "../../../entities/command/command";
 import { COMMAND_TYPE } from "../../../entities/command/command.type";
 import { Process, ProcessCtx } from "../../../entities/process/process";
-import { PROCESS_STATE } from "../../../entities/process/process.type";
+import { IProcess, PROCESS_STATE } from "../../../entities/process/process.type";
 import { Program } from "../../../entities/program/program";
 import { createAppAsyncThunk } from "../../../shared/store";
 import { collectTickData } from "../../monitoring";
 import { processes } from "../../process";
 import { openWindow } from "../../windows";
 
-const INTERVAL_IN_MILLISECONDS = 500;
+const INTERVAL_IN_MILLISECONDS = 100;
 
 export const updateProcesses = createAppAsyncThunk(
     'system/updateProcesses',
@@ -26,48 +27,90 @@ export const updateProcesses = createAppAsyncThunk(
 export const runTasks = createAppAsyncThunk(
     'system/runTasks',
     async (_, thunkAPI) => {
-        const { running } = thunkAPI.getState().processes;
+        try {
+        const { processes: { running }, system: { tick } } = thunkAPI.getState();
 
-        const orderedProcesses = Object.values(running).sort((a, b) => b.ctx.priority - a.ctx.priority);
+        const orderedProcesses = Object.values(running).sort((a, b) => a.ctx.priority - b.ctx.priority);
+        const groupedProcess = orderedProcesses.reduce((group, process) => {
+            const { state } = process.ctx;
+            (group[state] = group[state] || []).push(process);
+            return group;
+        }, {} as Record<string, IProcess[]>)
 
-        let firstProcess = orderedProcesses.find((process) => process.ctx.state === PROCESS_STATE.RUNNING);
+        let firstProcess = groupedProcess[PROCESS_STATE.RUNNING]?.[0];
 
         if(!firstProcess){
-            const possibleFirstProcess = orderedProcesses.find((process) => process.ctx.state === PROCESS_STATE.READY);
+            const possibleFirstProcess = groupedProcess[PROCESS_STATE.READY]?.[0];
             if(!possibleFirstProcess){
                 return;
             }
             firstProcess = possibleFirstProcess;
         }
 
+        if(!firstProcess){
+            return;
+        }
+
         const nextProcess = Process({
             ctx: ProcessCtx({
                 ...firstProcess.ctx,
                 state: PROCESS_STATE.RUNNING,
+                start: firstProcess.ctx.start || tick,
             }),
             program: Program({ ...firstProcess.program }),
             pid: firstProcess.pid,
         })
-        
-        const pointer = firstProcess.ctx.pointer || 0;
 
-        const commandsCount = firstProcess.ctx.commands.length;
+        thunkAPI.dispatch(processes.actions.updateRunning({ [nextProcess.pid]: Process({ ...nextProcess }) }));
+
+        const pointer = Math.max(nextProcess.ctx.pointer, 0);
+
+        const commandsCount = nextProcess.ctx.commands.length;
 
         if(pointer >= commandsCount){
-            nextProcess.ctx.state = PROCESS_STATE.END;
-        } else {
-            const command = firstProcess.ctx.commands[pointer];
-            if(command.exeCtx.type === COMMAND_TYPE.WAITING && nextProcess.ctx.state !== PROCESS_STATE.WAITING){
-                nextProcess.ctx.state = PROCESS_STATE.WAITING;
-                nextProcess.ctx.pointer += 1;
-            } else {
-                command.exeCtx.onComplete?.();
-                nextProcess.ctx.pointer += 1;
-            }
+            return;
         }
+    
+        const command = Command({...nextProcess.ctx.commands[pointer]});
 
-        thunkAPI.dispatch(processes.actions.updateRunning({ [nextProcess.pid]: nextProcess }));
-        thunkAPI.fulfillWithValue(true);
+        nextProcess.ctx.commandsLeft = Math.max(0, nextProcess.ctx.commandsLeft - 1);
+
+        if(command.exeCtx.type === COMMAND_TYPE.WAITING && nextProcess.ctx.state !== PROCESS_STATE.WAITING){
+            nextProcess.ctx.state = PROCESS_STATE.WAITING;
+            thunkAPI.dispatch(processes.actions.updateRunning({ [nextProcess.pid]: Process({ ...nextProcess }) }));
+            return;
+        }
+        if(nextProcess.ctx.commandsLeft <= 0){
+            nextProcess.ctx.end = tick;
+            nextProcess.ctx.state = PROCESS_STATE.WAITING;
+            nextProcess.ctx.priority = 0;
+            thunkAPI.dispatch(
+                processes.actions
+                    .updateRunning(
+                        { 
+                            [nextProcess.pid]: Process({ ...nextProcess })
+                        }
+                    )
+            );
+            command.exeCtx.onComplete?.(Process({ ...nextProcess }));
+            return;
+        }
+        if(nextProcess.ctx.start !== null && (nextProcess.ctx.start + nextProcess.ctx.quantum) <= tick){
+            nextProcess.ctx.state = PROCESS_STATE.READY;
+            nextProcess.ctx.start = null;
+            nextProcess.ctx.priority += 1;
+        }
+        thunkAPI.dispatch(
+            processes.actions
+                .updateRunning(
+                    { 
+                        [nextProcess.pid]: Process({ ...nextProcess })
+                    }
+                )
+        );
+        } catch (error) {
+            console.error(error);
+        }
     }
 )
 
@@ -81,11 +124,11 @@ export const startSystem = createAppAsyncThunk(
         }
 
         const newIntervalId = setInterval(() => {
+            thunkApi.dispatch(runTasks());
             thunkApi.dispatch(system.actions.upTick());
             thunkApi.dispatch(updateProcesses());
 
             thunkApi.dispatch(collectTickData());
-            thunkApi.dispatch(runTasks());
         }, INTERVAL_IN_MILLISECONDS);
 
         thunkApi.dispatch(system.actions.updateIntervalId(newIntervalId));

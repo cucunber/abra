@@ -1,15 +1,18 @@
-import { commandsRAMConsumption } from "../command/command";
+import { Command, commandsRAMConsumption } from "../command/command";
 import { Program } from "../program/program";
 import { IProcess, IProcessCtx, PROCESS_STATE } from "./process.type";
 
-export function ProcessCtx({ pointer, priority, quantum, commands, state = PROCESS_STATE.INIT }: 
-    Omit<IProcessCtx, 'state'> & Partial<Pick<IProcessCtx, 'state'>>): IProcessCtx {
+export function ProcessCtx({ pointer, priority, quantum, commands, state = PROCESS_STATE.INIT, commandsLeft = 0, start = null, end = null }: 
+    Omit<IProcessCtx, 'state' | 'commandsLeft' | 'start' | 'end'> & Partial<Pick<IProcessCtx, 'state' | 'commandsLeft' | 'start' | 'end' >>): IProcessCtx {
     return {
         pointer,
         priority,
         quantum,
         state,
-        commands
+        commands: commands.map(Command),
+        commandsLeft,
+        start,
+        end
     }
 }
 

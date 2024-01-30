@@ -29,7 +29,32 @@ export const DEFAULT_COMMANDS = {
         meta: CommandMeta({ name: 'draw' }), 
         exeCtx: CommandExeCtx({ 
             ticks: convertUnitsToHz(4, HZ_UNITS.mhz),
-            size: convertUnitsToBytes(100, SYS_UNITS.MiB)
+            size: convertUnitsToBytes(100, SYS_UNITS.MiB),
+            type: COMMAND_TYPE.WAITING
         })
+    }),
+    search: Command({
+        meta: CommandMeta({ name: 'search' }), 
+        exeCtx: CommandExeCtx({ ticks: 4, size: convertUnitsToBytes(60, SYS_UNITS.bytes)})
+    }),
+    focus: Command({
+        meta: CommandMeta({ name: 'focus' }), 
+        exeCtx: CommandExeCtx({ ticks: 4, size: convertUnitsToBytes(60, SYS_UNITS.bytes)})
+    }),
+    blur: Command({
+        meta: CommandMeta({ name: 'blur' }), 
+        exeCtx: CommandExeCtx({ ticks: 4, size: convertUnitsToBytes(60, SYS_UNITS.bytes)})
+    }),
+    writeFile: Command({
+        meta: CommandMeta({ name: 'writeFile' }), 
+        exeCtx: CommandExeCtx({ ticks: convertUnitsToHz(12, HZ_UNITS.mhz), size: convertUnitsToBytes(60, SYS_UNITS.bytes)})
+    }),
+    readFile: Command({
+        meta: CommandMeta({ name: 'readFile' }), 
+        exeCtx: CommandExeCtx({ 
+            ticks: 4, 
+            size: convertUnitsToBytes(60, SYS_UNITS.bytes),
+            type: COMMAND_TYPE.WAITING 
+        }),
     }),
 }

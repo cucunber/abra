@@ -1,0 +1,22 @@
+.container {
+  width: 100%;
+  height: 100%;
+}
+
+.panel {
+  background: var(--chakra-colors-blackAlpha-300);
+}
+
+.body {
+  width: 100%;
+  height: 100%;
+  resize: none;
+}
+
+.body:hover {
+  border: none;
+}
+.body:focus-visible {
+  box-shadow: none;
+  border: none;
+}

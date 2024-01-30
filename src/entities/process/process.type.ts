@@ -15,6 +15,9 @@ export interface IProcessCtx {
     quantum: number;
     state: typeof PROCESS_STATE[keyof typeof PROCESS_STATE];
     commands: ICommand[];
+    commandsLeft: number;
+    start: number | null,
+    end: number | null,
  }
  
 export interface IProcess {

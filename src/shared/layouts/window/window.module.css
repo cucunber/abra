@@ -1,6 +1,6 @@
 .window {
     min-width: 10dvw;
-    min-height: 10dvh;
+    min-height: 50dvh;
     max-width: 100dvh;
     max-height: 100dvh;
     border-radius: 20px;

@@ -5,6 +5,7 @@ import { createAppAsyncThunk } from "../../../shared/store";
 import { Process, ProcessCtx, processesResourcesConsumption } from "../../../entities/process/process";
 import { windows } from "../../windows";
 import { commandsRAMConsumption } from "../../../entities/command/command";
+import { HZ_UNITS, convertUnitsToHz } from "../../../shared/utils/systemUnits";
 
 export const addProgramToProcess = createAppAsyncThunk(
     'process/addProgramToProcess',
@@ -28,15 +29,23 @@ export const addProgramToProcess = createAppAsyncThunk(
 
         const nextPid = pid + 1;
 
+        const commandsLeft = Math.ceil(program.exeCtx.commands[0].exeCtx.ticks / system.cpu.ghz);
+
+        const quantumsToDo = Math.min(
+            system.cpu.ghz / convertUnitsToHz(1, HZ_UNITS.mhz),
+            commandsLeft
+        );
+
         const newProcess = Process({
             pid: nextPid,
             program: program,
             ctx: ProcessCtx({
                 pointer: 0,
                 priority: 0,
-                quantum: 0,
+                quantum: commandsLeft,
                 commands: program.exeCtx.commands,
-                state: PROCESS_STATE.READY
+                state: PROCESS_STATE.READY,
+                commandsLeft: commandsLeft,
             })
         })
         

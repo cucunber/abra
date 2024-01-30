@@ -11,7 +11,7 @@ export const collectRAMData = createAppAsyncThunk(
 
         const runningMemSize = Object.values(processes.running)
             .reduce((acc, process) => {
-                const commandsMemSize = process.ctx.commands.reduce((commandsAcc, command) => commandsAcc + command.exeCtx.size, 0);
+                const commandsMemSize = process.ctx.commands[process.ctx.pointer].exeCtx.size;
                 return acc + commandsMemSize;
             }, 0);
 
