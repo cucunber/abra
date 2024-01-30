@@ -6,6 +6,7 @@ import {
   ProgramMeta,
 } from "../../../entities/program/program";
 import { moveProcessPointer } from "../../../features/process/logic/movePointer";
+import { system } from "../../../features/system";
 import { HZ_UNITS, SYS_UNITS, convertUnitsToBytes, convertUnitsToHz } from "../../utils/systemUnits";
 import { DEFAULT_COMMANDS } from "../commands";
 
@@ -116,6 +117,18 @@ export const DEFAULT_INSTALLED_PROGRAMS = [
             ...DEFAULT_COMMANDS.writeFile.exeCtx,
             ticks: convertUnitsToHz(1000, HZ_UNITS.mhz),
             onComplete: (ctx) => {
+              store.dispatch(system.actions.addFile(convertUnitsToBytes(1, SYS_UNITS.GiB)));
+              store.dispatch(moveProcessPointer({ pid: ctx.pid, pointer: 0 }))
+            }
+          }
+        }),
+        Command({
+          ...DEFAULT_COMMANDS.delete,
+          exeCtx: {
+            ...DEFAULT_COMMANDS.delete.exeCtx,
+            ticks: convertUnitsToHz(10, HZ_UNITS.mhz),
+            onComplete: (ctx) => {
+              store.dispatch(system.actions.removeRandomFile());
               store.dispatch(moveProcessPointer({ pid: ctx.pid, pointer: 0 }))
             }
           }

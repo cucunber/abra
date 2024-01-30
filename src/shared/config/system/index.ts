@@ -11,6 +11,6 @@ import { HZ_UNITS, SYS_UNITS, convertUnitsToBytes, convertUnitsToHz } from "../.
  */
 export const DEFAULT_SYSTEM_CONFIG = System({
     cpu: CPU({ ghz: convertUnitsToHz(10, HZ_UNITS.mhz) }),
-    hdd: HDD({ size: convertUnitsToBytes(16, SYS_UNITS.GiB )}),
+    hdd: HDD({ size: convertUnitsToBytes(16, SYS_UNITS.GiB ), segment: 0, files: [] }),
     ram: RAM({ size: convertUnitsToBytes(4, SYS_UNITS.GiB) })
 })

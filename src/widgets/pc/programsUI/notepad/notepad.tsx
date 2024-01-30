@@ -5,23 +5,29 @@ import { moveProcessPointer } from "../../../../features/process/logic/movePoint
 import { useWindow } from "../../../../shared/layouts/window/window.hooks";
 
 const ACTION_CREATORS = {
-  save: (pid: number) => moveProcessPointer({ pid, pointer: 2 })
+  saveAC: (pid: number) => moveProcessPointer({ pid, pointer: 2 }),
+  deleteAC: (pid: number) => moveProcessPointer({ pid, pointer: 3 })
 }
 
 export const NotepadUI = () => {
-  const { save } = useBindActionCreators(ACTION_CREATORS)
+  const { deleteAC, saveAC } = useBindActionCreators(ACTION_CREATORS)
 
   const { pid } = useWindow();
 
-  const handleClick = () => {
-    save(pid);
+  const handleSave = () => {
+    saveAC(pid);
+  }
+
+  const handleDelete = () => {
+    deleteAC(pid);
   }
 
   return (
     <Box className={s.container}>
       <HStack className={s.panel}>
         <Menu>
-          <MenuButton onClick={handleClick} as={Box}>Сохранить</MenuButton>
+          <MenuButton onClick={handleSave} as={Box}>Сохранить</MenuButton>
+          <MenuButton onClick={handleDelete} as={Box}>Удалить</MenuButton>
         </Menu>
       </HStack>
       <textarea className={s.body} />

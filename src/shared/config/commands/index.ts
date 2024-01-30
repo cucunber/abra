@@ -47,7 +47,11 @@ export const DEFAULT_COMMANDS = {
     }),
     writeFile: Command({
         meta: CommandMeta({ name: 'writeFile' }), 
-        exeCtx: CommandExeCtx({ ticks: convertUnitsToHz(12, HZ_UNITS.mhz), size: convertUnitsToBytes(60, SYS_UNITS.bytes)})
+        exeCtx: CommandExeCtx({ ticks: convertUnitsToHz(12, HZ_UNITS.mhz), size: convertUnitsToBytes(60, SYS_UNITS.bytes) })
+    }),
+    delete: Command({
+        meta: CommandMeta({ name: 'delete' }),
+        exeCtx: CommandExeCtx({ ticks: convertUnitsToHz(12, HZ_UNITS.mhz), size: convertUnitsToBytes(60, SYS_UNITS.bytes) })
     }),
     readFile: Command({
         meta: CommandMeta({ name: 'readFile' }), 

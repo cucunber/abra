@@ -12,9 +12,11 @@ export const collectHDDData = createAppAsyncThunk(
         const installedProgramsMemSize = Object.values(installedPrograms)
             .reduce((acc, program) => acc + program.exeCtx.size, 0);
 
+        const files = system.system.hdd.files.reduce((size, file) => file.size + size, 0);
+
         const newHDDData = TickData({
             tick: system.tick,
-            value: installedProgramsMemSize
+            value: installedProgramsMemSize + files
         })
 
         if(monitoring.hdd.length < MAX_POINTS_COUNT){

@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { DEFAULT_SYSTEM_CONFIG } from "../../../shared/config/system";
 import { ISystem } from "../../../entities/system/system.type";
+import { File } from "../../../entities/hdd/hdd";
 
 interface ISystemState {
     system: ISystem,
@@ -27,6 +28,17 @@ export const system = createSlice({
         },
         updateIntervalId(state, action: PayloadAction<ISystemState['intervalId']>){
             state.intervalId = action.payload
+        },
+        addFile(state, action: PayloadAction<number>){
+            state.system.hdd.segment += 1;
+            const file = File({ id: state.system.hdd.segment, size: action.payload });
+            state.system.hdd.files.push(file);
+        },
+        removeFile(state, action: PayloadAction<number>) {
+            state.system.hdd.files = state.system.hdd.files.filter(file => file.id === action.payload);
+        },
+        removeRandomFile(state){
+            state.system.hdd.files = state.system.hdd.files.slice(1);
         }
     },
     selectors: {
