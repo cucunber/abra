@@ -3,7 +3,8 @@ import { IProcess } from "../../../entities/process/process.type";
 
 const INITIAL_PROCESSES_STATE = {
     pid: 0,
-    processes: {} as Record<number, IProcess>
+    queue: [] as IProcess[],
+    running: {} as Record<number, IProcess>,
 };
 
 export const processes = createSlice({
@@ -11,16 +12,27 @@ export const processes = createSlice({
     initialState: INITIAL_PROCESSES_STATE,
     reducers: {
         addToProcess: (state, action: PayloadAction<IProcess> ) => {
-            state.processes[action.payload.pid] = action.payload;
+            state.running[action.payload.pid] = action.payload;
         },
         removeFromProcess: (state, action: PayloadAction<IProcess['pid']> ) => {
-            delete state.processes[action.payload];
+            delete state.running[action.payload];
         },
-        updatePid(state) {
+        addToQueue: (state, action: PayloadAction<IProcess> ) => {
+            state.queue.push(action.payload);
+        },
+        removeFromQueue: (state, action: PayloadAction<IProcess['pid']>) => {
+            state.queue = state.queue.filter((process) => process.pid !== action.payload);
+        },
+        updatePid: (state) => {
             state.pid += 1;
+        },
+        updateRunning: (state, action: PayloadAction<Record<number, IProcess>>) => {
+            Object.keys(action.payload).forEach((pid) => {
+                state.running[pid as unknown as number] = action.payload[pid as unknown as number];
+            });
         }
     },
     selectors: {
-        selectRunningProcesses: state => state.processes,
+        selectRunningProcesses: state => state.running,
     },
 })

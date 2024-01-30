@@ -19,7 +19,7 @@ export const Windows = () => {
         }
         const zIndex = -index;
         const { process } = win;
-        const { commands } = process.program.exeCtx;
+
         return (
           <DraggableWindow key={process.pid} zIndex={zIndex} pid={process.pid}>
             {DEFAULT_SCREENS[process.program.meta.name]}
