@@ -24,18 +24,6 @@ export const SYSTEM_MONITORING = Program({
 
 export const DEFAULT_INSTALLED_PROGRAMS = [
   Program({
-    meta: ProgramMeta({ icon: "/programs/chrome.png", name: "Google Chrome" }),
-    exeCtx: ProgramExeCtx({
-      size: convertUnitsToBytes(100, SYS_UNITS.MiB),
-      commands: [
-        DEFAULT_COMMANDS.draw,
-        DEFAULT_COMMANDS.input,
-        DEFAULT_COMMANDS.math,
-        DEFAULT_COMMANDS.output,
-      ],
-    }),
-  }),
-  Program({
     meta: ProgramMeta({ icon: "/programs/firefox.png", name: "Firefox" }),
     exeCtx: ProgramExeCtx({
       size: convertUnitsToBytes(100, SYS_UNITS.MiB),
@@ -48,51 +36,9 @@ export const DEFAULT_INSTALLED_PROGRAMS = [
     }),
   }),
   Program({
-    meta: ProgramMeta({ icon: "/programs/excel.png", name: "Excel" }),
-    exeCtx: ProgramExeCtx({
-      size: convertUnitsToBytes(500, SYS_UNITS.MiB),
-      commands: [
-        DEFAULT_COMMANDS.draw,
-        DEFAULT_COMMANDS.input,
-        DEFAULT_COMMANDS.math,
-        DEFAULT_COMMANDS.output,
-      ],
-    }),
-  }),
-  Program({
     meta: ProgramMeta({ icon: "/programs/word.png", name: "Word" }),
     exeCtx: ProgramExeCtx({
       size: convertUnitsToBytes(450, SYS_UNITS.MiB),
-      commands: [
-        DEFAULT_COMMANDS.draw,
-        DEFAULT_COMMANDS.input,
-        DEFAULT_COMMANDS.math,
-        DEFAULT_COMMANDS.output,
-      ],
-    }),
-  }),
-  Program({
-    meta: ProgramMeta({
-      icon: "/programs/powerPoint.png",
-      name: "Power Point",
-    }),
-    exeCtx: ProgramExeCtx({
-      size: convertUnitsToBytes(250, SYS_UNITS.MiB),
-      commands: [
-        DEFAULT_COMMANDS.draw,
-        DEFAULT_COMMANDS.input,
-        DEFAULT_COMMANDS.math,
-        DEFAULT_COMMANDS.output,
-      ],
-    }),
-  }),
-  Program({
-    meta: ProgramMeta({
-      icon: "/programs/discord.png",
-      name: "Discord",
-    }),
-    exeCtx: ProgramExeCtx({
-      size: convertUnitsToBytes(250, SYS_UNITS.MiB),
       commands: [
         DEFAULT_COMMANDS.draw,
         DEFAULT_COMMANDS.input,

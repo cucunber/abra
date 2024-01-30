@@ -1,7 +1,6 @@
 import { PropsWithChildren, useMemo } from "react";
 import { IWindow } from "./window.type";
 import { Box, HStack, IconButton, Text, VStack } from "@chakra-ui/react";
-import { CloseIcon, MinusIcon } from "@chakra-ui/icons";
 import { processes, removeFromProcess } from "../../../features/process";
 import { windows } from "../../../features/windows";
 import { useAppSelector, useBindActionCreators } from "../../hooks/redux";
@@ -50,22 +49,23 @@ export const Window = ({
       <VStack gap="0" alignContent="initial" justify="initial" className={clsx(s.window, className)} {...properties}>
         <HStack className={s.panel}>
           <HStack w="100%" {...listeners}>
+            <Box backgroundImage={ process.program.meta.icon } w="16px" h="16px" backgroundSize="cover" />
             <Text fontWeight="700" fontSize="sm">
               {windowName}
             </Text>
           </HStack>
-          <HStack className={s.controls}>
+          <HStack className={s.controls} gap="0">
             <IconButton
               size="xs"
               aria-label="close"
               onClick={handleCollapse}
-              icon={<MinusIcon />}
+              icon={<Box background="orange" w="16px" h="16px" borderRadius="50%" />}
             />
             <IconButton
               size="xs"
               aria-label="close"
               onClick={handleClose}
-              icon={<CloseIcon />}
+              icon={<Box background="red" w="16px" h="16px" borderRadius="50%" />}
             />
           </HStack>
         </HStack>

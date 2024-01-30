@@ -98,7 +98,6 @@ export const runTasks = createAppAsyncThunk(
         if(nextProcess.ctx.start !== null && (nextProcess.ctx.start + nextProcess.ctx.quantum) <= tick){
             nextProcess.ctx.state = PROCESS_STATE.READY;
             nextProcess.ctx.start = null;
-            nextProcess.ctx.priority += 1;
         }
         thunkAPI.dispatch(
             processes.actions
